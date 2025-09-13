@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Form 연습</title>
+  <style>
+    :root{
+      --brand:#2196f3;        /* 버튼 기본색 */
+      --brand-hover:#1976d2;  /* 버튼 호버색 */
+      --ok:#4CAF50;
+      --border:#ccc;
+      --form-bg:#e0f7fa;      /* 폼 배경색 */
+      --text:#222;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      color: var(--text);
+    }
+    form {
+      width: 400px;
+      padding: 20px;
+      border: 2px solid var(--ok);
+      border-radius: 10px;
+      background-color: var(--form-bg); /* #e0f7fa */
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      margin-top: 6px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    /* ---------------- 버튼 커스터마이즈 ---------------- */
+    button {
+      background-color: var(--brand);  /* #2196f3 */
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color .2s ease, transform .05s ease;
+      border: none;
+    }
+    button:hover { background-color: var(--brand-hover); }
+    button:active { transform: translateY(1px); }
+
+    /* ---------------- 라디오(성별) 커스텀 ---------------- */
+    .radio-group { display: flex; gap: 16px; margin-top: 6px; }
+    .radio {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: normal;
+    }
+    .radio input[type="radio"] {
+      /* 기본 스타일 제거 후 원형 커스텀 */
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #7aa7c7;
+      border-radius: 50%;
+      display: inline-grid;
+      place-content: center;
+      background: white;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+    /* 안쪽 점 */
+    .radio input[type="radio"]::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform .15s ease-in-out;
+      background: var(--brand);
+    }
+    .radio input[type="radio"]:checked::before { transform: scale(1); }
+    .radio input[type="radio"]:hover {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(33,150,243,0.15); /* hover 시 강조 */
+    }
+    .radio input[type="radio"]:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    /* ---------------- 체크박스 가로 정렬 ---------------- */
+    .checkbox-group {
+      display: flex;            /* flex 로 가로 정렬 */
+      gap: 14px;
+      flex-wrap: wrap;          /* 줄바꿈 허용(폭 좁을 때) */
+      margin-top: 6px;
+    }
+    .checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+    /* 체크박스 모양 약간만 개선 (지원 브라우저에서 색상 적용) */
+    .checkbox input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--brand);
+      cursor: pointer;
+    }
+
+    /* 입력 공통 포커스 */
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+      border-color: var(--brand);
+      background: #f5fbff;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>회원가입 Form</h2>
+  <form>
+    <!-- 1. 텍스트 입력 (필수) -->
+    <label for="username">아이디 <span style="color:#c62828">*</span></label>
+    <input type="text" id="username" name="username" placeholder="아이디 입력" required>
+
+    <!-- 2. 비밀번호 (필수 + 최소 8자) -->
+    <label for="password">비밀번호 <span style="color:#c62828">*</span></label>
+    <input type="password" id="password" name="password" minlength="8" required placeholder="최소 8자 이상">
+
+    <!-- 3. 라디오 버튼 (성별) -->
+    <label>성별:</label>
+    <div class="radio-group" role="radiogroup" aria-label="성별">
+      <label class="radio" for="male">
+        <input type="radio" id="male" name="gender" value="male">
+        <span>남성</span>
+      </label>
+      <label class="radio" for="female">
+        <input type="radio" id="female" name="gender" value="female">
+        <span>여성</span>
+      </label>
+    </div>
+
+    <!-- 4. 체크박스 (가로 정렬) -->
+    <label>관심분야:</label>
+    <div class="checkbox-group" aria-label="관심분야">
+      <label class="checkbox">
+        <input type="checkbox" name="interest" value="AI">
+        <span>AI</span>
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="interest" value="Web">
+        <span>웹 개발</span>
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="interest" value="Game">
+        <span>게임 개발</span>
+      </label>
+    </div>
+
+    <!-- 5. 드롭다운 (개발자 기본 선택) -->
+    <label for="job">직업:</label>
+    <select id="job" name="job">
+      <option value="student">학생</option>
+      <option value="developer" selected>개발자</option>
+      <option value="designer">디자이너</option>
+    </select>
+
+    <!-- 6. 텍스트에어리어 -->
+    <label for="bio">자기소개:</label>
+    <textarea id="bio" name="bio" rows="4" placeholder="간단한 소개를 작성하세요"></textarea>
+
+    <!-- 7. 제출 버튼 -->
+    <button type="submit">회원가입</button>
+  </form>
+
+</body>
+</html>

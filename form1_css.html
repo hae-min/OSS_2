@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset = "UTF-8">
+    <title>축구 경기 티켓 예매</title>
+ 
+    <style>
+        body {
+            background-color: rgb(246, 249, 252);
+            font-family: 'Segoe UI';
+            padding : 0;
+            margin : 0;
+        }
+        h1 {
+            text-align: center;
+            color:rgb(72, 72, 244);
+            
+        }
+        fieldset {
+            border : 1px solid #cacccf;
+            border-radius: 8px;
+            padding : 20px;
+            margin :20px;
+            background-color: #f7f7f8;
+            
+        }
+
+        form {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            max-width: 600px; 
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #b3b3b3;
+            margin: 20px auto;
+        }
+
+        legend{
+            font-weight: bold;
+            color:#1d1e1e;
+            padding:0 5px;
+        }
+
+        label{
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="time"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width:95%;
+            padding: 8px;
+            margin-top: 5px;
+            border:1px solid #cacccf;
+            border-radius: 8px;
+            font-size : 14px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            padding: 8px;
+            margin-top: 5px;
+            font-size : 14px;
+        }
+
+        button {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-bottom: 15px; 
+      margin-left: 17px;
+    }
+    button[type="reset"] {
+      background-color: #6c757d;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    small {
+      color: #666;
+    }
+
+    .form-actions {
+     display: flex;
+    justify-content: flex-start; 
+     gap: 10px;                
+           
+    }
+
+  </style>
+        
+        
+   
+
+
+</head>
+<body>
+    <h1>축구 경기 티켓 예매</h1>
+    <form action="index.html" method="get">
+        <fieldset>
+            <legend>경기 정보</legend>
+            
+            <label for="stadium">경기장</label><br />
+            <input type="text" name="stadium" list="stadium-list" placeholder="예 : 서울월드컵경기장" required/>
+            <datalist id="stadium-list">
+                <option value="서울월드컵경기장"></option>
+                <option value="수원월드컵경기장"></option>
+                <option value="포항스틸야드"></option>
+                <option value="울산문수경기장"></option>
+            </datalist>
+            <br /><br />
+
+            <label for="date">경기 날짜</label><br>
+            <input type="date" name="match-date"  required/>
+            <br/><br/>
+
+
+            <label for="start time">경기 시작 시간</label><br>
+            <input type="time" id="start-time" name="start-time" required/>
+            <br/><br/>
+
+            <label for="section">응원 측면 선택</label> 
+            <br>
+            <input type="radio" name="cheer-section" id="home-section" value="home-section" required/>
+            <label for="home-section">홈팀 섹션</label>
+            <br>
+            <input type="radio" name="cheer-section" id="away-section" value="away-section" required/>
+            <label for="away-section">원정 섹션</label>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>좌석 및 수량</legend>
+
+                <label for="seat">좌석 구역</label><br>
+                <select id="seat" name="seat" placeholder="좌석 구역을 선택하세요" required>
+                    <optgroup label="프리미엄">
+                        <option value="VIP-center">VIP 중앙</option>
+                        <option value="VIP-corner">VIP 코너</option>
+                    </optgroup>
+                    <optgroup label="일반">
+                        <option value ="main">메인 스탠드</option>
+                        <option value ="north">북측 스탠드</option>
+                        <option value ="south">남측 스탠드</option>
+                    </optgroup>
+                </select>
+                <br/><br/>
+
+                <label for="number of ticket">티켓 수량(1~6)</label><br>
+                <input type="number" id="number of ticket" name="number" min="1" max="6" value="1" required/>
+                <br/><br/>
+
+                <input type="checkbox" name="close seat" value="yes">
+                <label>가능한 경우 좌석을 붙여서 배정</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>예매자 정보</legend>
+                
+                <label for="name">이름</label> <br>
+                <input type="text" name="name" placeholder="홍길동" required/>
+                <br/><br/>
+
+                <label for="email">이메일</label> <br>
+                <input type="text" name="email" placeholder="you@example.com" required/>
+                <br/><br/>
+
+                <label for="phonenumber">휴대전화</label><br>
+                <input type="text" name="phonenumber" placeholder="010-1234-5678" required/><br>
+                <small>형식:010-1234-5678</small>
+                
+            </fieldset>
+
+            <fieldset>
+                <legend>결제 및 요청사항</legend>
+
+                <label for="payment">결제 방법</label><br>
+                <input type="text" name="payment" list="payment-list" placeholder="결제 수단을 선택하세요" required/>
+                <datalist id="payment-list">
+                    <option value="신용/체크카드"></option>
+                    <option value="계좌결제"></option>
+                    <option value="모바일결제">삼성페이, 카카오페이, 토스페이 등</option>
+                </datalist>
+                <br/><br/>
+
+                <label for="ask">요청사항 (선택)</label><br>
+                <textarea name="ask" rows=5 palceholder="예: 통로 좌석 번호, 어린이 동반 등"></textarea>
+                <br/><br/>
+
+                <input type="checkbox" name="check" required/>
+                <label>(필수) 예매 약관 및 환불 규정에 동의합니다.</label>
+
+                </fieldset>
+            
+               <div class="form-actions">
+                <button type="submit">예매하기</button>
+                 <button type="reset">초기화</button>
+                </div>
+        
+    </form>
+</body>
